@@ -70,10 +70,10 @@ jobs:
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secret.HOST}}
-          username: ${{ secret.USER }}
-          key: ${{ secret.SSH_KEY }}
-          passphrase: ${{ secret.PASSPHRASE }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker pull milov52/infratest
             sudo docker stop $(sudo docker ps -a -q)
