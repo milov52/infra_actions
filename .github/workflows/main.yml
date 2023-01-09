@@ -62,3 +62,19 @@ jobs:
         with:
           push: true
           tags: milov52/infratest:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push_ti_docker_hub
+    steps:
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secret.HOST}}
+          username: ${{ secret.USER }}
+          key: ${{ secret.SSH_KEY }}
+          passphrase: ${{ secret.PASSPHRASE }}
+          script: |
+            sudo docker pull milov52/infratest
+            sudo docker stop $(sudo docker ps -a -q)
+            sudo docker run --rm -d -p 5000:5000 milov52/infratest
