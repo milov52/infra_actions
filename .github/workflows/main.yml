@@ -49,7 +49,7 @@ jobs:
     needs: tests
     steps:
       - name: Check out to repo
-        uses: actions:checkout@v2
+        uses: actions/checkout@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login ti Docker
